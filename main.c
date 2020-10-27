@@ -19,8 +19,6 @@ void fEliminarC (tClave clave){
 
 void fEliminarV (tValor valor){
 
-    printf("Valor: %i\n",*((int*)valor));
-
     free(&valor);
 
 }
@@ -106,13 +104,29 @@ int main(int argc,char ** args)
     valorAux=(int*) malloc(sizeof(int));
     i = 0;
 
-    claveAux = "Fede";
-    printf("%i\n",m_recuperar(mapeo,claveAux));
-
-
-    int fin;
-    printf("Fin");
-    scanf("Ingrese algo: %i",&fin);
+    programa(mapeo);
 
     return 0;
+}
+
+void programa(tMapeo m){
+    int i = -1;
+    int cdadApariciones;
+    char buscar[MAXCHAR];
+    while(i!=0){
+        printf("Ingrese 1 para buscar la cantidad de apariciones de una palabra, ingrese 0 para cerrar: ");
+        scanf("%i",&i);
+        if(i == 1){
+            printf("Ingrese la palabra a buscar: ");
+            scanf("%s",&buscar);
+            cdadApariciones = m_recuperar(m,sigPalabra(buscar,strlen(buscar)));
+            printf("Cantidad de apariciones: %i\n",cdadApariciones);
+        } else if(i == 0){
+            salir(m);
+        }
+    }
+}
+
+void salir(tMapeo m){
+    m_destruir(&m,fEliminarC,fEliminarV);
 }
