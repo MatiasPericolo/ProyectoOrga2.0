@@ -4,6 +4,7 @@
 #include "lista.h"
 #include "mapeo.h"
 
+#define MAXCHAR 1000
 void fEliminar (tElemento elemento){
 
     free(elemento);
@@ -48,14 +49,25 @@ int fComparacion(tClave c1,tClave c2){
     return toReturn;
 }
 
+char* sigPalabra(char buffer[],int size){
+    char* claveAux=(char*) malloc(sizeof(char)*size);
+    for(int i = 0;i<size;i++){
+        claveAux[i]=buffer[i];
+    }
+    claveAux[size]='\0';
+    return claveAux;
+}
+
 int main(int argc,char ** args)
 {
     tMapeo mapeo;
 
     crear_mapeo(&mapeo,10,fHash,fComparacion);
 
-    char* claveAux=(char*) malloc(sizeof(char));
+    char* claveAux;
     int* valorAux=(int*) malloc(sizeof(int));
+
+    char buffer[MAXCHAR];
 
     char * archivo=args[1];
 
@@ -67,18 +79,16 @@ int main(int argc,char ** args)
     if(file){
         while(fscanf(file,"%c",&caracter)==1){
             if(caracter != ' ' && caracter != '\n'){
-                claveAux[i]=caracter;
+                buffer[i]=caracter;
                 i++;
             } else {
-                claveAux[i]='\0';
-                printf("%s\n",claveAux);
+                claveAux = sigPalabra(buffer,i);
                 if(m_recuperar(mapeo,claveAux) == NULL){
                     valorAux = 1;
                 } else {
                     valorAux = m_recuperar(mapeo,claveAux)+1;
                 }
                 m_insertar(mapeo,claveAux,valorAux);
-                claveAux=(char*) malloc(sizeof(char));
                 valorAux=(int*) malloc(sizeof(int));
                 i = 0;
             }
@@ -86,47 +96,19 @@ int main(int argc,char ** args)
     }
     fclose(file);
 
+    claveAux = sigPalabra(buffer,i);
+    if(m_recuperar(mapeo,claveAux) == NULL){
+        valorAux = 1;
+    } else {
+        valorAux = m_recuperar(mapeo,claveAux)+1;
+    }
+    m_insertar(mapeo,claveAux,valorAux);
+    valorAux=(int*) malloc(sizeof(int));
+    i = 0;
 
-    claveAux = "Matias";
+    claveAux = "Fede";
     printf("%i\n",m_recuperar(mapeo,claveAux));
 
-
-    /*
-    *clave="Matias";
-    *valor=1;
-
-    crear_mapeo(&mapeo,10,fHash,fComparacion);
-
-    m_insertar(mapeo,clave,valor);
-
-    clave=(char**) malloc(sizeof(char*));
-    valor=(int*) malloc(sizeof(int));
-
-    *clave="Sol";
-    *valor=2;
-
-    m_insertar(mapeo,clave,valor);
-
-    clave=(char**) malloc(sizeof(char*));
-    valor=(int*) malloc(sizeof(int));
-
-    *clave="Sol";
-    *valor=1;
-
-    m_insertar(mapeo,clave,valor);
-
-    clave=(char**) malloc(sizeof(char*));
-    valor=(int*) malloc(sizeof(int));
-
-    *clave="Sol";
-
-    int* aux=m_recuperar(mapeo,clave);
-
-    m_eliminar(mapeo,clave,fEliminarC,fEliminarV);
-
-    if(aux!=NULL)
-        printf("Devuelve: %i\n",*aux);
-    */
 
     int fin;
     printf("Fin");
