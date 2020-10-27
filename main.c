@@ -66,21 +66,8 @@ int main(int argc,char ** args)
     i=0;
 
     if(file){
-        while((caracter = getc(file)) != EOF){
-
-            if((caracter != ' ')){
-                printf("No\n");
-                //printf("Caracter: %c\n",&caracter);
-                (*claveAux)[i]=caracter;
-                i++;
-            }else{
-                (*claveAux)[i] = '\0';
-                printf("Palabra: %s\n",*claveAux);
-
-                claveAux=(char**) malloc(sizeof(char*));
-
-            }
-
+        while(fscanf(file,"%c",&caracter)==1){
+            printf("%c\n",caracter);
         }
     }
 
@@ -122,7 +109,7 @@ int main(int argc,char ** args)
     */
 
     int fin;
-    printf("Fin: ");
+    printf("Fin");
     scanf("Ingrese algo: %i",&fin);
 
     return 0;
