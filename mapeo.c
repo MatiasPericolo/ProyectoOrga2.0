@@ -10,6 +10,8 @@ static int max(int numero1,int numero2);
 void (* funcion_eliminar_clave)(void *);
 void (* funcion_eliminar_valor)(void *);
 void funcion_eliminar_entrada(tElemento e);
+void funcion_NO_eliminar_entrada(tElemento e);
+void m_reHash(tMapeo mapeo);
 
 /**
  Inicializa un mapeo vacío, con capacidad inicial igual al MAX(10, CI).
@@ -48,6 +50,12 @@ void crear_mapeo(tMapeo * m, int ci, int (*fHash)(void *), int (*fComparacion)(v
 **/
 tValor m_insertar(tMapeo m, tClave c, tValor v){
 
+    printf("Elementos: %i\n",m->cantidad_elementos);
+
+    if((m->cantidad_elementos/m->longitud_tabla)>(0.75)){
+        m_reHash(m);
+    }
+
     int encontre=0;
     tPosicion posViajante;
     int i;
@@ -74,6 +82,7 @@ tValor m_insertar(tMapeo m, tClave c, tValor v){
     }
 
     if(encontre==0){
+        m->cantidad_elementos++;
         tEntrada entradaInsertar=(tEntrada) malloc(sizeof(struct entrada));
         entradaInsertar->clave=c;
         entradaInsertar->valor=v;
@@ -125,7 +134,8 @@ void m_eliminar(tMapeo m, tClave c, void (*fEliminarC)(void *), void (*fEliminar
 void m_destruir(tMapeo * m, void (*fEliminarC)(void *), void (*fEliminarV)(void *)){
 
     unsigned int i;
-
+    funcion_eliminar_valor = fEliminarV;
+    funcion_eliminar_clave = fEliminarC;
     for(i=0;i<((*m)->longitud_tabla);i++){
         l_destruir(&((*m)->tabla_hash[i]),&funcion_eliminar_entrada);
     }
@@ -167,6 +177,59 @@ tValor m_recuperar(tMapeo m, tClave c){
     }
 
     return toReturn;
+}
+
+void m_reHash(tMapeo mapeo){
+
+    tPosicion posViajante;
+    int j;
+    int fin;
+    tEntrada entradaAux;
+    tLista * tabla_anterior=mapeo->tabla_hash;
+    mapeo->longitud_tabla *= 2;
+    mapeo->tabla_hash = malloc(sizeof(tLista)*mapeo->longitud_tabla);
+    int i;
+    tLista listaAux;
+    int h;
+
+    for(i=0;i<(mapeo->longitud_tabla);i++){
+        crear_lista(&(mapeo->tabla_hash[i]));
+    }
+
+    for(i=0;i<((mapeo->longitud_tabla)/2);i++){
+
+        listaAux=tabla_anterior[i];
+        //printf("Numero: %i",i);
+        scanf("%s");
+        fin=l_longitud(listaAux);
+        posViajante=l_primera(listaAux);
+        printf("Longitud lista: %i\n",fin);
+
+        for(j=0;j<fin;j++){
+
+            entradaAux=(tEntrada)l_recuperar(listaAux,posViajante);
+            l_eliminar(listaAux,posViajante,&funcion_NO_eliminar_entrada);
+
+            printf("Entrada: %s\n",((char*)entradaAux->clave));
+
+            //Ingreso de nueva entrada
+            h=mapeo->hash_code(entradaAux->clave);
+            h=h%(mapeo->longitud_tabla);
+            l_insertar(mapeo->tabla_hash[h],l_primera(mapeo->tabla_hash[h]),entradaAux);
+
+            if(posViajante!=l_ultima(listaAux)){
+                posViajante=l_siguiente(listaAux,posViajante);
+            }
+
+        }
+
+    }
+
+
+}
+
+void funcion_NO_eliminar_entrada(tElemento e){
+
 }
 
 /**

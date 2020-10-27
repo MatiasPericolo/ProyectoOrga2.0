@@ -227,7 +227,6 @@ int l_longitud(tLista l){
     tPosicion nodoViajante;
     nodoViajante=l;
 
-
     while(nodoViajante->siguiente!=NULL){
         contador=contador+1;
         nodoViajante=nodoViajante->siguiente;
