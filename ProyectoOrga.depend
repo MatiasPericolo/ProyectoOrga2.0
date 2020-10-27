@@ -28,11 +28,18 @@
 
 1603823619 d:\uns\orga\proyectoorga2.0\lista.h
 
-1603823619 source:d:\uns\orga\proyectoorga2.0\mapeo.c
+1603828322 source:d:\uns\orga\proyectoorga2.0\mapeo.c
 	<stdio.h>
 	<stdlib.h>
 	"mapeo.h"
 
 1603823619 d:\uns\orga\proyectoorga2.0\mapeo.h
 	"lista.h"
+
+1603828694 source:d:\uns\orga\proyectoorga2.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lista.h"
+	"mapeo.h"
 

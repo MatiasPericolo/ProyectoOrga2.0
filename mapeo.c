@@ -142,7 +142,6 @@ void m_destruir(tMapeo * m, void (*fEliminarC)(void *), void (*fEliminarV)(void 
  Retorna el valor correspondiente, o NULL en caso contrario.
 **/
 tValor m_recuperar(tMapeo m, tClave c){
-
     int encontre=0;
     tPosicion posViajante;
     int i;

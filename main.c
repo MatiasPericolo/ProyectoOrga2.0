@@ -26,7 +26,7 @@ void fEliminarV (tValor valor){
 
 int fHash(tClave clave) {
     int hash = 0;
-    char * palabra=*((char **)clave);
+    char*  palabra=clave;
     for (int i = 0; i < strlen(palabra); i++) {
         hash = 31 * hash + palabra[i];
     }
@@ -37,8 +37,8 @@ int fComparacion(tClave c1,tClave c2){
 
     int toReturn=1;
 
-    char * palabra1=*((char **)c1);
-    char * palabra2=*((char **)c2);
+    char * palabra1=c1;
+    char * palabra2=c2;
 
     if(strcmp(palabra1,palabra2)==0)
         toReturn=0;
@@ -54,7 +54,7 @@ int main(int argc,char ** args)
 
     crear_mapeo(&mapeo,10,fHash,fComparacion);
 
-    char** claveAux=(char**) malloc(sizeof(char*));
+    char* claveAux=(char*) malloc(sizeof(char));
     int* valorAux=(int*) malloc(sizeof(int));
 
     char * archivo=args[1];
@@ -62,14 +62,34 @@ int main(int argc,char ** args)
     char caracter;
     FILE *file;
     file = fopen(archivo, "r");
-    int i;
-    i=0;
+    int i=0;
 
     if(file){
         while(fscanf(file,"%c",&caracter)==1){
-            printf("%c\n",caracter);
+            if(caracter != ' ' && caracter != '\n'){
+                claveAux[i]=caracter;
+                i++;
+            } else {
+                claveAux[i]='\0';
+                printf("%s\n",claveAux);
+                if(m_recuperar(mapeo,claveAux) == NULL){
+                    valorAux = 1;
+                } else {
+                    valorAux = m_recuperar(mapeo,claveAux)+1;
+                }
+                m_insertar(mapeo,claveAux,valorAux);
+                claveAux=(char*) malloc(sizeof(char));
+                valorAux=(int*) malloc(sizeof(int));
+                i = 0;
+            }
         }
     }
+    fclose(file);
+
+
+    claveAux = "Matias";
+    printf("%i\n",m_recuperar(mapeo,claveAux));
+
 
     /*
     *clave="Matias";
