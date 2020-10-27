@@ -79,8 +79,6 @@ int main(int argc,char ** args)
 
                 claveAux=(char**) malloc(sizeof(char*));
 
-                //if(claveAux==NULL)
-                    printf("Cagaste pa");
             }
 
         }
