@@ -193,12 +193,13 @@ void m_reHash(tMapeo mapeo){
             int h = mapeo->hash_code(aux->clave);
             h = h % (mapeo->longitud_tabla*2);
             l_insertar(tablaNueva[h],l_primera(tablaNueva[h]),aux);
-            printf("Entrada: %s - %i\n",aux->clave,aux->valor);
+            printf("Entrada: %s - %i\n",aux->clave,*((int*)aux->valor));
             printf("Hash: %i\n",h);
             fin--;
             puntero = l_siguiente(mapeo->tabla_hash[i],puntero);
        }
    }
+   //scanf("%s");
    mapeo->longitud_tabla=mapeo->longitud_tabla*2;
    mapeo->tabla_hash=tablaNueva;
 }

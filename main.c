@@ -5,6 +5,10 @@
 #include "mapeo.h"
 
 #define MAXCHAR 1000
+
+void programa(tMapeo m);
+void salir(tMapeo m);
+
 void fEliminar (tElemento elemento){
 
     free(elemento);
@@ -19,7 +23,7 @@ void fEliminarC (tClave clave){
 
 void fEliminarV (tValor valor){
 
-    free(&valor);
+    free(valor);
 
 }
 
@@ -82,9 +86,9 @@ int main(int argc,char ** args)
             } else {
                 claveAux = sigPalabra(buffer,i);
                 if(m_recuperar(mapeo,claveAux) == NULL){
-                    valorAux = 1;
+                    *valorAux = 1;
                 } else {
-                    valorAux = m_recuperar(mapeo,claveAux)+1;
+                    *valorAux = *((int*)m_recuperar(mapeo,claveAux))+1;
                 }
                 m_insertar(mapeo,claveAux,valorAux);
                 valorAux=(int*) malloc(sizeof(int));
@@ -96,9 +100,9 @@ int main(int argc,char ** args)
 
     claveAux = sigPalabra(buffer,i);
     if(m_recuperar(mapeo,claveAux) == NULL){
-        valorAux = 1;
-    } else {
-        valorAux = m_recuperar(mapeo,claveAux)+1;
+        *valorAux = 1;
+            } else {
+        *valorAux = *((int*)m_recuperar(mapeo,claveAux))+1;
     }
     m_insertar(mapeo,claveAux,valorAux);
     valorAux=(int*) malloc(sizeof(int));
@@ -106,6 +110,7 @@ int main(int argc,char ** args)
 
     programa(mapeo);
 
+    printf("Programa finalizado");
     scanf("%s");
 
     return 0;
@@ -121,7 +126,7 @@ void programa(tMapeo m){
         if(i == 1){
             printf("Ingrese la palabra a buscar: ");
             scanf("%s",&buscar);
-            cdadApariciones = m_recuperar(m,sigPalabra(buscar,strlen(buscar)));
+            cdadApariciones = *((int*)m_recuperar(m,sigPalabra(buscar,strlen(buscar))));
             printf("Cantidad de apariciones: %i\n",cdadApariciones);
         } else if(i == 0){
             salir(m);
