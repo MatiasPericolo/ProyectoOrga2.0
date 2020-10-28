@@ -49,9 +49,6 @@ void crear_mapeo(tMapeo * m, int ci, int (*fHash)(void *), int (*fComparacion)(v
  Finaliza indicando MAP_ERROR_MEMORIA si no es posible reservar memoria correspondientemente.
 **/
 tValor m_insertar(tMapeo m, tClave c, tValor v){
-
-    printf("Elementos: %i\n",m->cantidad_elementos);
-
     if((m->cantidad_elementos/m->longitud_tabla)>(0.75)){
         m_reHash(m);
     }
@@ -180,53 +177,32 @@ tValor m_recuperar(tMapeo m, tClave c){
 }
 
 void m_reHash(tMapeo mapeo){
+    printf("---\n");
+   tLista * tablaNueva =  malloc(sizeof(tLista)*mapeo->longitud_tabla*2);
+   int fin;
+   for(int i = 0;i<mapeo->longitud_tabla*2;i++){
+        crear_lista(&(tablaNueva[i]));
+   }
 
-    tPosicion posViajante;
-    int j;
-    int fin;
-    tEntrada entradaAux;
-    tLista * tabla_anterior=mapeo->tabla_hash;
-    mapeo->longitud_tabla *= 2;
-    mapeo->tabla_hash = malloc(sizeof(tLista)*mapeo->longitud_tabla);
-    int i;
-    tLista listaAux;
-    int h;
-
-    for(i=0;i<(mapeo->longitud_tabla);i++){
-        crear_lista(&(mapeo->tabla_hash[i]));
-    }
-
-    for(i=0;i<((mapeo->longitud_tabla)/2);i++){
-
-        listaAux=tabla_anterior[i];
-        //printf("Numero: %i",i);
-        scanf("%s");
-        fin=l_longitud(listaAux);
-        posViajante=l_primera(listaAux);
-        printf("Longitud lista: %i\n",fin);
-
-        for(j=0;j<fin;j++){
-
-            entradaAux=(tEntrada)l_recuperar(listaAux,posViajante);
-            l_eliminar(listaAux,posViajante,&funcion_NO_eliminar_entrada);
-
-            printf("Entrada: %s\n",((char*)entradaAux->clave));
-
-            //Ingreso de nueva entrada
-            h=mapeo->hash_code(entradaAux->clave);
-            h=h%(mapeo->longitud_tabla);
-            l_insertar(mapeo->tabla_hash[h],l_primera(mapeo->tabla_hash[h]),entradaAux);
-
-            if(posViajante!=l_ultima(listaAux)){
-                posViajante=l_siguiente(listaAux,posViajante);
-            }
-
-        }
-
-    }
-
-
+   for(int i = 0;i<mapeo->longitud_tabla;i++){
+       fin = l_longitud(mapeo->tabla_hash[i]);
+       tPosicion puntero =  l_primera(mapeo->tabla_hash[i]);
+       printf("Fin: %i\n",fin);
+       while(fin>0){
+            tEntrada aux = l_recuperar(mapeo->tabla_hash[i],puntero);
+            int h = mapeo->hash_code(aux->clave);
+            h = h % (mapeo->longitud_tabla*2);
+            l_insertar(tablaNueva[h],l_primera(tablaNueva[h]),aux);
+            printf("Entrada: %s - %i\n",aux->clave,aux->valor);
+            printf("Hash: %i\n",h);
+            fin--;
+            puntero = l_siguiente(mapeo->tabla_hash[i],puntero);
+       }
+   }
+   mapeo->longitud_tabla=mapeo->longitud_tabla*2;
+   mapeo->tabla_hash=tablaNueva;
 }
+
 
 void funcion_NO_eliminar_entrada(tElemento e){
 

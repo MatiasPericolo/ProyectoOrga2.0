@@ -106,6 +106,8 @@ int main(int argc,char ** args)
 
     programa(mapeo);
 
+    scanf("%s");
+
     return 0;
 }
 
