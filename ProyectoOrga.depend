@@ -43,3 +43,25 @@
 	"lista.h"
 	"mapeo.h"
 
+1603899778 source:c:\users\matyr\documents\github\proyectoorga2.0\lista.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.h"
+
+1603825329 c:\users\matyr\documents\github\proyectoorga2.0\lista.h
+
+1603901805 source:c:\users\matyr\documents\github\proyectoorga2.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lista.h"
+	"mapeo.h"
+
+1603825329 c:\users\matyr\documents\github\proyectoorga2.0\mapeo.h
+	"lista.h"
+
+1603902408 source:c:\users\matyr\documents\github\proyectoorga2.0\mapeo.c
+	<stdio.h>
+	<stdlib.h>
+	"mapeo.h"
+

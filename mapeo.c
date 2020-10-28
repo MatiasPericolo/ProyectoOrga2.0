@@ -198,6 +198,7 @@ void m_reHash(tMapeo mapeo){
             fin--;
             puntero = l_siguiente(mapeo->tabla_hash[i],puntero);
        }
+       l_destruir(&(mapeo->tabla_hash[i]),&funcion_NO_eliminar_entrada);
    }
    //scanf("%s");
    mapeo->longitud_tabla=mapeo->longitud_tabla*2;
