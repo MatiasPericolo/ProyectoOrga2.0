@@ -21,14 +21,14 @@
 	"lista.h"
 	"mapeo.h"
 
-1603844022 source:d:\uns\orga\proyectoorga2.0\lista.c
+1603921654 source:d:\uns\orga\proyectoorga2.0\lista.c
 	<stdio.h>
 	<stdlib.h>
 	"lista.h"
 
 1603823619 d:\uns\orga\proyectoorga2.0\lista.h
 
-1603885545 source:d:\uns\orga\proyectoorga2.0\mapeo.c
+1604001329 source:d:\uns\orga\proyectoorga2.0\mapeo.c
 	<stdio.h>
 	<stdlib.h>
 	"mapeo.h"
@@ -36,7 +36,7 @@
 1603823619 d:\uns\orga\proyectoorga2.0\mapeo.h
 	"lista.h"
 
-1603885518 source:d:\uns\orga\proyectoorga2.0\main.c
+1604001329 source:d:\uns\orga\proyectoorga2.0\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
