@@ -50,7 +50,7 @@
 
 1603825329 c:\users\matyr\documents\github\proyectoorga2.0\lista.h
 
-1603901805 source:c:\users\matyr\documents\github\proyectoorga2.0\main.c
+1604001051 source:c:\users\matyr\documents\github\proyectoorga2.0\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -60,7 +60,7 @@
 1603825329 c:\users\matyr\documents\github\proyectoorga2.0\mapeo.h
 	"lista.h"
 
-1603902408 source:c:\users\matyr\documents\github\proyectoorga2.0\mapeo.c
+1604000757 source:c:\users\matyr\documents\github\proyectoorga2.0\mapeo.c
 	<stdio.h>
 	<stdlib.h>
 	"mapeo.h"

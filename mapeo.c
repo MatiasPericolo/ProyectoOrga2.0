@@ -177,7 +177,7 @@ tValor m_recuperar(tMapeo m, tClave c){
 }
 
 void m_reHash(tMapeo mapeo){
-    printf("---\n");
+
    tLista * tablaNueva =  malloc(sizeof(tLista)*mapeo->longitud_tabla*2);
    int fin;
    for(int i = 0;i<mapeo->longitud_tabla*2;i++){
@@ -187,20 +187,17 @@ void m_reHash(tMapeo mapeo){
    for(int i = 0;i<mapeo->longitud_tabla;i++){
        fin = l_longitud(mapeo->tabla_hash[i]);
        tPosicion puntero =  l_primera(mapeo->tabla_hash[i]);
-       printf("Fin: %i\n",fin);
+
        while(fin>0){
             tEntrada aux = l_recuperar(mapeo->tabla_hash[i],puntero);
             int h = mapeo->hash_code(aux->clave);
             h = h % (mapeo->longitud_tabla*2);
             l_insertar(tablaNueva[h],l_primera(tablaNueva[h]),aux);
-            printf("Entrada: %s - %i\n",aux->clave,*((int*)aux->valor));
-            printf("Hash: %i\n",h);
             fin--;
             puntero = l_siguiente(mapeo->tabla_hash[i],puntero);
        }
        l_destruir(&(mapeo->tabla_hash[i]),&funcion_NO_eliminar_entrada);
    }
-   //scanf("%s");
    mapeo->longitud_tabla=mapeo->longitud_tabla*2;
    mapeo->tabla_hash=tablaNueva;
 }
