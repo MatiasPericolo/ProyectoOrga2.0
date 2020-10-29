@@ -121,19 +121,13 @@ void programa(tMapeo m){
     int cdadApariciones;
     char buscar[MAXCHAR];
     while(i!=0){
-
         printf("Ingrese 1 para buscar la cantidad de apariciones de una palabra, ingrese 0 para cerrar: ");
         scanf("%i",&i);
-
         if(i == 1){
             printf("Ingrese la palabra a buscar: ");
             scanf("%s",&buscar);
-            if(m_recuperar(m,sigPalabra(buscar,strlen(buscar))) != NULL){
-                cdadApariciones = *((int*)m_recuperar(m,sigPalabra(buscar,strlen(buscar))));
-                printf("Cantidad de apariciones: %i\n",cdadApariciones);
-            } else {
-                printf("La palabra no existe\n");
-            }
+            cdadApariciones = *((int*)m_recuperar(m,sigPalabra(buscar,strlen(buscar))));
+            printf("Cantidad de apariciones: %i\n",cdadApariciones);
         } else if(i == 0){
             salir(m);
         }

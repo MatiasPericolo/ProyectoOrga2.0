@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1603900444 source:c:\users\matias\documents\codeblocks proyects\proyectoorga\lista.c
+1603898145 source:c:\users\matias\documents\codeblocks proyects\proyectoorga\lista.c
 	<stdio.h>
 	<stdlib.h>
 	"lista.h"
 
 1603812027 c:\users\matias\documents\codeblocks proyects\proyectoorga\lista.h
 
-1603996475 source:c:\users\matias\documents\codeblocks proyects\proyectoorga\mapeo.c
+1603898669 source:c:\users\matias\documents\codeblocks proyects\proyectoorga\mapeo.c
 	<stdio.h>
 	<stdlib.h>
 	"mapeo.h"
@@ -14,7 +14,7 @@
 1603812035 c:\users\matias\documents\codeblocks proyects\proyectoorga\mapeo.h
 	"lista.h"
 
-1604000543 source:c:\users\matias\documents\codeblocks proyects\proyectoorga\main.c
+1603899346 source:c:\users\matias\documents\codeblocks proyects\proyectoorga\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
